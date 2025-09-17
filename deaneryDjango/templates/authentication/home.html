@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная - Электронный деканат{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="container">
+        {% if is_logged_in %}
+            <div class="hero-title">Добро пожаловать, {{ current_user.username }}!</div>
+            <div class="hero-lead">Email: {{ current_user.email }}</div>
+            <p class="mb-2">
+                Роль: 
+                {% if user_role == 'admin' %}
+                    <span class="label label-danger">Администратор</span>
+                {% elif user_role == 'teacher' %}
+                    <span class="label label-warning">Преподаватель</span>
+                {% else %}
+                    <span class="label label-info">Студент</span>
+                {% endif %}
+            </p>
+            <div class="hero-actions">
+                <a class="button button-light" href="{% url 'authentication:logout' %}">
+                    <i class="fas fa-sign-out-alt"></i> Выйти из системы
+                </a>
+            </div>
+        {% else %}
+            <div class="hero-title">{{ message }}</div>
+            <p class="hero-lead">Система управления учебным процессом</p>
+            <div class="hero-actions">
+                <a class="button button-light" href="{% url 'authentication:login' %}">
+                    <i class="fas fa-sign-in-alt"></i> Войти в систему
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% if is_logged_in and available_sections %}
+    <h3><i class="fas fa-th-large"></i> Доступные разделы</h3>
+    <div class="feature-grid mt-3">
+        {% for section in available_sections %}
+        <div class="feature-card">
+            <div class="feature-icon"><i class="{{ section.icon }}"></i></div>
+            <div class="feature-title">{{ section.name }}</div>
+            <div class="feature-actions">
+                <a href="{% url section.url %}" class="button button-primary">Перейти</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% elif is_logged_in %}
+<div class="row">
+    <div class="col-12">
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">Доступ ограничен</h4>
+            <p>У вас нет доступа ни к одному разделу. Обратитесь к администратору.</p>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if not is_logged_in %}
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-users"></i></div>
+            <div class="feature-title">Студенты</div>
+            <div class="feature-text">Управление студентами и группами</div>
+            <small class="text-muted">Требуется авторизация</small>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+            <div class="feature-title">Преподаватели</div>
+            <div class="feature-text">Информация о преподавателях</div>
+            <small class="text-muted">Требуется авторизация</small>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-calendar"></i></div>
+            <div class="feature-title">Расписание</div>
+            <div class="feature-text">Расписание занятий</div>
+            <small class="text-muted">Требуется авторизация</small>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="feature-title">Оценки</div>
+            <div class="feature-text">Академическая успеваемость</div>
+            <small class="text-muted">Требуется авторизация</small>
+        </div>
+    </div>
+{% endif %}
+
+<div class="grid mt-4">
+    <div class="col">
+        <div class="panel">
+            <div class="panel-header">
+                <h5><i class="fas fa-bell"></i> Приложения Django</h5>
+            </div>
+            <div class="panel-body">
+                <ul>
+                {% for app in apps %}
+                    <li>{{ app }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="panel">
+            <div class="panel-header">
+                <h5><i class="fas fa-info-circle"></i> Статус системы</h5>
+            </div>
+            <div class="panel-body">
+                <p><i class="fas fa-check-circle" style="color: var(--success)"></i> Django 5.2.6 запущен</p>
+                <p><i class="fas fa-check-circle" style="color: var(--success)"></i> PostgreSQL подключен</p>
+                <p><i class="fas fa-check-circle" style="color: var(--success)"></i> Все модели созданы</p>
+                <p><i class="fas fa-check-circle" style="color: var(--success)"></i> Система готова к использованию</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

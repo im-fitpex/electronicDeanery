@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Вход в систему - Электронный деканат{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 narrow-window">
+        <div class="panel">
+            <div class="panel-header">
+                <h4 class="mb-0"><i class="fas fa-sign-in-alt"></i> Вход в систему</h4>
+            </div>
+            <div class="panel-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Имя пользователя</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Пароль</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="button button-primary w-100">
+                        <i class="fas fa-sign-in-alt"></i> Войти
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Мои оценки{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h4><i class="fas fa-star"></i> {{ message }}</h4>
+                </div>
+                <div class="card-body">
+                    {% if grades %}
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Предмет</th>
+                                    <th>Тип оценки</th>
+                                    <th>Оценка</th>
+                                    <th>Дата</th>
+                                    <th>Комментарий</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for grade in grades %}
+                                <tr>
+                                    <td>{{ grade.grade_id }}</td>
+                                    <td>
+                                        {% if grade.subject_id %}
+                                            Предмет #{{ grade.subject_id }}
+                                        {% else %}
+                                            Не указан
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ grade.grade_type|default:"Не указан" }}</td>
+                                    <td>
+                                        <span class="badge 
+                                            {% if grade.grade >= 4.5 %}badge-success
+                                            {% elif grade.grade >= 3.5 %}badge-warning  
+                                            {% else %}badge-danger
+                                            {% endif %}">
+                                            {{ grade.grade }}
+                                        </span>
+                                    </td>
+                                    <td>{{ grade.date_recorded|date:"d.m.Y" }}</td>
+                                    <td>{{ grade.comments|default:"" }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-info" role="alert">
+                        <h4 class="alert-heading">Оценки не найдены</h4>
+                        <p>У вас пока нет оценок в системе.</p>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="mt-3">
+                        <a href="{% url 'authentication:home' %}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Назад
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

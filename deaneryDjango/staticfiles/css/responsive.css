@@ -1,0 +1,349 @@
+/* Адаптивные стили для мобильных устройств */
+
+/* Улучшения для очень маленьких экранов (до 480px) */
+@media (max-width: 479.98px) {
+    .container {
+        padding: 0 10px;
+    }
+    
+    .page-title {
+        font-size: 1.5rem;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .btn {
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+    }
+    
+    .table-responsive {
+        font-size: 0.875rem;
+    }
+    
+    .navbar-brand {
+        font-size: 1rem;
+    }
+    
+    .stats-card .stats-number {
+        font-size: 2rem;
+    }
+    
+    .action-icons {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    
+    .action-icon {
+        width: 100%;
+        justify-content: flex-start;
+        padding: 0.5rem;
+    }
+}
+
+/* Улучшения для планшетов (768px - 991.98px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .container {
+        max-width: 750px;
+    }
+    
+    .stats-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .card-body {
+        padding: 1.25rem;
+    }
+}
+
+/* Улучшения для больших экранов (от 1200px) */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+    
+    .page-title {
+        font-size: 2.5rem;
+    }
+    
+    .card {
+        box-shadow: var(--shadow);
+    }
+    
+    .stats-card {
+        padding: 2.5rem 1.5rem;
+    }
+    
+    .stats-card .stats-number {
+        font-size: 3.5rem;
+    }
+}
+
+/* Улучшения доступности */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Темная тема (если поддерживается системой) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-primary: #e9ecef;
+        --text-secondary: #adb5bd;
+        --text-muted: #6c757d;
+        --bg-white: #212529;
+        --bg-light: #343a40;
+        --bg-dark: #495057;
+        --border-color: #495057;
+    }
+    
+    body {
+        background-color: var(--bg-white);
+        color: var(--text-primary);
+    }
+    
+    .card {
+        background-color: var(--bg-light);
+        border-color: var(--border-color);
+    }
+    
+    .table {
+        color: var(--text-primary);
+    }
+    
+    .table th {
+        background-color: var(--bg-dark);
+        color: var(--text-primary);
+    }
+    
+    .form-control {
+        background-color: var(--bg-light);
+        border-color: var(--border-color);
+        color: var(--text-primary);
+    }
+    
+    .navbar {
+        background-color: var(--bg-dark) !important;
+    }
+}
+
+/* Улучшения печати */
+@media print {
+    .navbar,
+    .btn,
+    .action-icons,
+    .card-footer,
+    footer {
+        display: none !important;
+    }
+    
+    .container {
+        width: 100% !important;
+        max-width: none !important;
+        padding: 0 !important;
+    }
+    
+    .card {
+        border: none !important;
+        box-shadow: none !important;
+    }
+    
+    .page-title {
+        font-size: 18pt;
+        margin-bottom: 12pt;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.4;
+        color: #000;
+        background: #fff;
+    }
+    
+    .table {
+        border-collapse: collapse;
+    }
+    
+    .table th,
+    .table td {
+        border: 1px solid #000;
+        padding: 4pt;
+    }
+    
+    .badge {
+        border: 1px solid #000;
+        background: transparent !important;
+        color: #000 !important;
+    }
+}
+
+/* Высококонтрастный режим */
+@media (prefers-contrast: high) {
+    :root {
+        --primary-color: #0000ff;
+        --success-color: #008000;
+        --danger-color: #ff0000;
+        --warning-color: #ff8c00;
+        --text-primary: #000000;
+        --bg-white: #ffffff;
+        --border-color: #000000;
+    }
+    
+    .btn {
+        border-width: 2px;
+    }
+    
+    .card {
+        border-width: 2px;
+    }
+    
+    .table th,
+    .table td {
+        border-width: 2px;
+    }
+}
+
+/* Состояния фокуса для доступности */
+.btn:focus,
+.form-control:focus,
+.nav-link:focus,
+.dropdown-item:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Улучшения для пользователей с ограниченной моторикой */
+@media (pointer: coarse) {
+    .btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .action-icon {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .nav-link {
+        padding: 0.75rem 1rem;
+    }
+    
+    .dropdown-item {
+        padding: 0.75rem 1rem;
+    }
+}
+
+/* Анимации для улучшения UX */
+.card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn {
+    transition: all 0.15s ease-in-out;
+}
+
+.action-icon {
+    transition: all 0.15s ease-in-out;
+}
+
+.alert {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Улучшения loading состояний */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+    position: relative;
+}
+
+.loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Sticky элементы */
+.sticky-top {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+
+/* Утилиты для скрытия элементов */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Кастомные скроллбары для Webkit */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--light-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+/* Улучшения для selection */
+::selection {
+    background: var(--primary-light);
+    color: var(--text-white);
+}
+
+::-moz-selection {
+    background: var(--primary-light);
+    color: var(--text-white);
+}

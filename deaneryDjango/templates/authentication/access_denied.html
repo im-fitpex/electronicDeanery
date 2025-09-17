@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Доступ запрещен{% endblock %}
+
+{% block content %}
+<div class="narrow-window mt-5">
+    <div class="panel">
+        <div class="panel-header bg-danger text-white text-center">
+            <h4><i class="fas fa-ban"></i> Доступ запрещен</h4>
+        </div>
+        <div class="panel-body text-center">
+            <div class="alert alert-error" role="alert">
+                <h5>У вас недостаточно прав для доступа к этой странице</h5>
+                <p class="mb-0">Обратитесь к администратору системы для получения необходимых разрешений.</p>
+            </div>
+
+            <div class="mt-4" style="display:flex;justify-content:center;gap:12px;">
+                <a href="{% url 'authentication:home' %}" class="button button-primary">
+                    <i class="fas fa-home"></i> Вернуться на главную
+                </a>
+                <a href="{% url 'authentication:logout' %}" class="button button-secondary">
+                    <i class="fas fa-sign-out-alt"></i> Выйти
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

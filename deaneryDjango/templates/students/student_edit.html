@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-warning text-dark">
+                    <h4><i class="fas fa-edit"></i> {{ title }}</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="{{ form.record_book_number.id_for_label }}" class="form-label">{{ form.record_book_number.label }}</label>
+                                    {{ form.record_book_number }}
+                                    {% if form.record_book_number.help_text %}
+                                        <small class="form-text text-muted">{{ form.record_book_number.help_text }}</small>
+                                    {% endif %}
+                                    {% if form.record_book_number.errors %}
+                                        <div class="text-danger">{{ form.record_book_number.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="{{ form.student_type.id_for_label }}" class="form-label">{{ form.student_type.label }}</label>
+                                    {{ form.student_type }}
+                                    {% if form.student_type.errors %}
+                                        <div class="text-danger">{{ form.student_type.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label for="{{ form.last_name.id_for_label }}" class="form-label">{{ form.last_name.label }} <span class="text-danger">*</span></label>
+                                    {{ form.last_name }}
+                                    {% if form.last_name.errors %}
+                                        <div class="text-danger">{{ form.last_name.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label for="{{ form.first_name.id_for_label }}" class="form-label">{{ form.first_name.label }} <span class="text-danger">*</span></label>
+                                    {{ form.first_name }}
+                                    {% if form.first_name.errors %}
+                                        <div class="text-danger">{{ form.first_name.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label for="{{ form.middle_name.id_for_label }}" class="form-label">{{ form.middle_name.label }}</label>
+                                    {{ form.middle_name }}
+                                    {% if form.middle_name.errors %}
+                                        <div class="text-danger">{{ form.middle_name.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="{{ form.birth_date.id_for_label }}" class="form-label">{{ form.birth_date.label }} <span class="text-danger">*</span></label>
+                                    {{ form.birth_date }}
+                                    {% if form.birth_date.errors %}
+                                        <div class="text-danger">{{ form.birth_date.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="{{ form.admission_date.id_for_label }}" class="form-label">{{ form.admission_date.label }} <span class="text-danger">*</span></label>
+                                    {{ form.admission_date }}
+                                    {% if form.admission_date.errors %}
+                                        <div class="text-danger">{{ form.admission_date.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="{{ form.email.id_for_label }}" class="form-label">{{ form.email.label }}</label>
+                                    {{ form.email }}
+                                    {% if form.email.errors %}
+                                        <div class="text-danger">{{ form.email.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="{{ form.phone.id_for_label }}" class="form-label">{{ form.phone.label }}</label>
+                                    {{ form.phone }}
+                                    {% if form.phone.errors %}
+                                        <div class="text-danger">{{ form.phone.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="{{ form.group.id_for_label }}" class="form-label">{{ form.group.label }}</label>
+                                    {{ form.group }}
+                                    {% if form.group.errors %}
+                                        <div class="text-danger">{{ form.group.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="{{ form.status.id_for_label }}" class="form-label">{{ form.status.label }}</label>
+                                    {{ form.status }}
+                                    {% if form.status.errors %}
+                                        <div class="text-danger">{{ form.status.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'students:student_detail' student.student_id %}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Отмена
+                            </a>
+                            <button type="submit" class="btn btn-warning">
+                                <i class="fas fa-save"></i> Сохранить изменения
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

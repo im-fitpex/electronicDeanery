@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ student.full_name }} - Детали студента{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4><i class="fas fa-user-graduate"></i> {{ student.full_name }}</h4>
+                </div>
+                <div class="card-body">
+                    {% if student %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Личная информация</h5>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td><strong>Номер зачетки:</strong></td>
+                                    <td>{{ student.record_book_number }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Фамилия:</strong></td>
+                                    <td>{{ student.last_name|default:"Не указано" }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Имя:</strong></td>
+                                    <td>{{ student.first_name|default:"Не указано" }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Отчество:</strong></td>
+                                    <td>{{ student.middle_name|default:"Не указано" }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Дата рождения:</strong></td>
+                                    <td>{{ student.birth_date|date:"d.m.Y"|default:"Не указана" }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Email:</strong></td>
+                                    <td>{{ student.email|default:"Не указан" }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Телефон:</strong></td>
+                                    <td>{{ student.phone|default:"Не указан" }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Учебная информация</h5>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td><strong>Группа:</strong></td>
+                                    <td>
+                                        {% if student.group %}
+                                            <a href="{% url 'students:group_detail' student.group.group_id %}" class="btn btn-sm btn-outline-primary">
+                                                {{ student.group.group_name }}
+                                            </a>
+                                        {% else %}
+                                            Не назначена
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Тип студента:</strong></td>
+                                    <td>
+                                        {% if student.student_type == 'bachelor' %}
+                                            Бакалавр
+                                        {% elif student.student_type == 'master' %}
+                                            Магистр
+                                        {% elif student.student_type == 'specialist' %}
+                                            Специалист
+                                        {% elif student.student_type == 'postgraduate' %}
+                                            Аспирант
+                                        {% else %}
+                                            {{ student.student_type }}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Дата поступления:</strong></td>
+                                    <td>{{ student.admission_date|date:"d.m.Y"|default:"Не указана" }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Статус:</strong></td>
+                                    <td>
+                                        <span class="badge bg-{% if student.status == 'active' %}success{% elif student.status == 'academic_leave' %}warning{% elif student.status == 'graduated' %}info{% else %}danger{% endif %}">
+                                            {% if student.status == 'active' %}
+                                                Активен
+                                            {% elif student.status == 'academic_leave' %}
+                                                Академический отпуск
+                                            {% elif student.status == 'expelled' %}
+                                                Отчислен
+                                            {% elif student.status == 'graduated' %}
+                                                Выпущен
+                                            {% else %}
+                                                {{ student.status }}
+                                            {% endif %}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Активность:</strong></td>
+                                    <td>
+                                        {% if student.is_active %}
+                                            <span class="badge bg-success">Активен</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">Неактивен</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    {% else %}
+                    <div class="alert alert-danger" role="alert">
+                        <h4 class="alert-heading">Ошибка</h4>
+                        <p>Студент не найден.</p>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="mt-4">
+                        <a href="{% url 'students:student_list' %}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> К списку студентов
+                        </a>
+                        
+                        {% if request.session.user_role == 'admin' %}
+                        <a href="{% url 'students:student_edit' student.student_id %}" class="btn btn-warning">
+                            <i class="fas fa-edit"></i> Редактировать
+                        </a>
+                        {% endif %}
+                        
+                        <a href="{% url 'grades:student_grades' student.student_id %}" class="btn btn-info">
+                            <i class="fas fa-star"></i> Посмотреть оценки
+                        </a>
+                        
+                        <a href="{% url 'authentication:home' %}" class="btn btn-primary">
+                            <i class="fas fa-home"></i> На главную
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

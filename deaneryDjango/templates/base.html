@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% load static %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Электронный деканат{% endblock %}</title>
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2Pkf6k7+tQ9Krm3n1eYH1G8Q2v5m4wWvY9VOGZsv5nYeD1w4r5V6L1Qf3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- App Styles -->
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" />
+</head>
+<body>
+    <!-- Topbar (no Bootstrap, human-friendly classes) -->
+    <header class="topbar">
+        <div class="container topbar-inner">
+            <a class="topbar-brand" href="{% url 'authentication:home' %}">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Электронный деканат</span>
+            </a>
+
+            <nav class="topbar-nav" aria-label="Основная навигация">
+                <ul class="topbar-list">
+                    {% if request.session.user_id %}
+                        <li class="topbar-item">
+                            <a class="topbar-link" href="{% url 'authentication:profile' %}">
+                                <i class="fas fa-user-cog"></i>
+                                <span>Профиль</span>
+                            </a>
+                        </li>
+                        <li class="topbar-item">
+                            <a class="topbar-link" href="{% url 'authentication:logout' %}">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Выйти из системы</span>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="topbar-item">
+                            <a class="topbar-link" href="{% url 'authentication:login' %}">
+                                <i class="fas fa-sign-in-alt"></i>
+                                <span>Вход</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mt-4">
+        {% if messages %}
+            <div>
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" aria-label="Закрыть"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-row">
+                <div class="footer-col">
+                    <p>&copy; {% now "Y" %} Электронный деканат.</p>
+                </div>
+                <div class="footer-col footer-right">
+                    <div class="footer-links">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Minimal scripts (no Bootstrap) -->
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

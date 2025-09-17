@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %}Детали преподавателя{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h4><i class="fas fa-chalkboard-teacher"></i> Информация о преподавателе</h4>
+                </div>
+                <div class="card-body">
+                    {% if teacher %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Основная информация</h5>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td><strong>ID:</strong></td>
+                                    <td>{{ teacher.teacher_id }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Фамилия:</strong></td>
+                                    <td>{{ teacher.last_name|default:"Не указано" }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Имя:</strong></td>
+                                    <td>{{ teacher.first_name|default:"Не указано" }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Отчество:</strong></td>
+                                    <td>{{ teacher.middle_name|default:"Не указано" }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Email:</strong></td>
+                                    <td>{{ teacher.email|default:"Не указан" }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Телефон:</strong></td>
+                                    <td>{{ teacher.phone|default:"Не указан" }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Рабочая информация</h5>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td><strong>Кафедра:</strong></td>
+                                    <td>
+                                        {% if teacher.department_id %}
+                                            Кафедра #{{ teacher.department_id }}
+                                        {% else %}
+                                            Не назначена
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Должность:</strong></td>
+                                    <td>{{ teacher.position|default:"Не указана" }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Дата найма:</strong></td>
+                                    <td>{{ teacher.hire_date|date:"d.m.Y"|default:"Не указана" }}</td>
+                                </tr>
+                                <!-- <tr>
+                                    <td><strong>Зарплата:</strong></td>
+                                    <td>
+                                        {% if teacher.salary %}
+                                            {{ teacher.salary }} руб.
+                                        {% else %}
+                                            Не указана
+                                        {% endif %}
+                                    </td>
+                                </tr> -->
+                            </table>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-danger" role="alert">
+                        <h4 class="alert-heading">Ошибка</h4>
+                        <p>Преподаватель не найден.</p>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="mt-4">
+                        <a href="{% url 'teachers:teacher_list' %}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> К списку преподавателей
+                        </a>
+                        
+                        {% if request.session.user_role == 'admin' %}
+                        <a href="{% url 'teachers:teacher_edit' teacher.teacher_id %}" class="btn btn-warning">
+                            <i class="fas fa-edit"></i> Редактировать
+                        </a>
+                        {% endif %}
+                        
+                        <a href="{% url 'authentication:home' %}" class="btn btn-primary">
+                            <i class="fas fa-home"></i> На главную
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

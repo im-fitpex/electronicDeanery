@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль пользователя - Электронный деканат{% endblock %}
+
+{% block content %}
+<div class="narrow-window">
+    <div class="panel">
+        <div class="panel-header bg-info text-white">
+            <h5><i class="fas fa-user"></i> Профиль пользователя</h5>
+        </div>
+        <div class="panel-body">
+            {% if current_user %}
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                <div>
+                    <p><strong>Имя пользователя:</strong> {{ current_user.username }}</p>
+                    <p><strong>Email:</strong> {{ current_user.email }}</p>
+                    <p><strong>ID пользователя:</strong> {{ current_user.user_id }}</p>
+                    <p><strong>Роль:</strong>
+                        {% if user_role == 'admin' %}
+                            <span class="label label-danger">Администратор</span>
+                        {% elif user_role == 'teacher' %}
+                            <span class="label label-warning">Преподаватель</span>
+                        {% else %}
+                            <span class="label label-info">Студент</span>
+                        {% endif %}
+                    </p>
+                </div>
+                <div>
+                    <p><strong>Дата создания:</strong> {{ current_user.created_at|date:"d.m.Y H:i" }}</p>
+                    <p><strong>Последнее обновление:</strong> {{ current_user.updated_at|date:"d.m.Y H:i" }}</p>
+                    <p><strong>Последний вход:</strong> {{ current_user.last_login|date:"d.m.Y H:i"|default:"Не записан" }}</p>
+                    <p><strong>Статус:</strong>
+                        {% if current_user.is_active %}
+                            <span class="label label-success">Активен</span>
+                        {% else %}
+                            <span class="label label-danger">Заблокирован</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+
+            {% if user_role == 'student' %}
+            <div class="mt-4">
+                <h6><i class="fas fa-graduation-cap"></i> Информация о студенте</h6>
+                {% if student_info %}
+                <div class="alert alert-info">
+                    <p><strong>Группа:</strong> {{ student_info.group_id|default:"Не назначена" }}</p>
+                    <p><strong>Курс:</strong> {{ student_info.year_of_study|default:"Не указан" }}</p>
+                </div>
+                {% else %}
+                <div class="alert alert-warning">
+                    Данные студента не найдены в системе
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            <div class="mt-3" style="display:flex;gap:12px;align-items:center;">
+                <a href="{% url 'authentication:home' %}" class="button button-secondary">
+                    <i class="fas fa-arrow-left"></i> Назад
+                </a>
+                {% if user_role == 'admin' %}
+                <a href="{% url 'authentication:admin_panel' %}" class="button button-primary">
+                    <i class="fas fa-cogs"></i> Админ панель
+                </a>
+                {% endif %}
+            </div>
+            {% else %}
+            <div class="alert alert-danger">
+                <h4 class="alert-heading">Ошибка</h4>
+                <p>Данные пользователя не найдены. Пожалуйста, войдите в систему заново.</p>
+                <a href="{% url 'authentication:login' %}" class="button button-primary">Войти</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

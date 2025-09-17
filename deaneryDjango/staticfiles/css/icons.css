@@ -1,0 +1,439 @@
+/* Простая система иконок для замены Font Awesome */
+.icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    margin-right: 0.25rem;
+    vertical-align: -0.125em;
+}
+
+/* Иконки с использованием Unicode символов */
+.icon-graduation-cap::before {
+    content: "🎓";
+}
+
+.icon-user::before {
+    content: "👤";
+}
+
+.icon-users::before {
+    content: "👥";
+}
+
+.icon-cog::before, 
+.icon-user-cog::before {
+    content: "⚙️";
+}
+
+.icon-sign-in-alt::before {
+    content: "🔑";
+}
+
+.icon-sign-out-alt::before {
+    content: "🚪";
+}
+
+.icon-home::before {
+    content: "🏠";
+}
+
+.icon-list::before {
+    content: "📋";
+}
+
+.icon-plus::before {
+    content: "➕";
+}
+
+.icon-edit::before {
+    content: "✏️";
+}
+
+.icon-trash::before {
+    content: "🗑️";
+}
+
+.icon-search::before {
+    content: "🔍";
+}
+
+.icon-filter::before {
+    content: "🔽";
+}
+
+.icon-download::before {
+    content: "⬇️";
+}
+
+.icon-upload::before {
+    content: "⬆️";
+}
+
+.icon-print::before {
+    content: "🖨️";
+}
+
+.icon-mail::before, 
+.icon-envelope::before {
+    content: "✉️";
+}
+
+.icon-phone::before {
+    content: "📞";
+}
+
+.icon-calendar::before {
+    content: "📅";
+}
+
+.icon-clock::before {
+    content: "🕐";
+}
+
+.icon-book::before {
+    content: "📚";
+}
+
+.icon-bookmark::before {
+    content: "🔖";
+}
+
+.icon-star::before {
+    content: "⭐";
+}
+
+.icon-check::before {
+    content: "✅";
+}
+
+.icon-times::before, 
+.icon-close::before {
+    content: "❌";
+}
+
+.icon-warning::before {
+    content: "⚠️";
+}
+
+.icon-info::before {
+    content: "ℹ️";
+}
+
+.icon-question::before {
+    content: "❓";
+}
+
+.icon-arrow-left::before {
+    content: "⬅️";
+}
+
+.icon-arrow-right::before {
+    content: "➡️";
+}
+
+.icon-arrow-up::before {
+    content: "⬆️";
+}
+
+.icon-arrow-down::before {
+    content: "⬇️";
+}
+
+.icon-menu::before {
+    content: "☰";
+}
+
+.icon-dots::before {
+    content: "⋯";
+}
+
+.icon-file::before {
+    content: "📄";
+}
+
+.icon-folder::before {
+    content: "📁";
+}
+
+.icon-save::before {
+    content: "💾";
+}
+
+.icon-settings::before {
+    content: "⚙️";
+}
+
+.icon-dashboard::before {
+    content: "📊";
+}
+
+.icon-chart::before {
+    content: "📈";
+}
+
+.icon-table::before {
+    content: "📋";
+}
+
+.icon-card::before {
+    content: "🃏";
+}
+
+.icon-grid::before {
+    content: "⊞";
+}
+
+.icon-th::before {
+    content: "▦";
+}
+
+/* Альтернативные иконки с CSS формами для более современного вида */
+.icon-modern {
+    position: relative;
+    background: none;
+    border: none;
+    margin-right: 0.5rem;
+}
+
+.icon-modern::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid currentColor;
+}
+
+.icon-modern.icon-user::before {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border-bottom: none;
+}
+
+.icon-modern.icon-user::after {
+    content: "";
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 10px;
+    border: 2px solid currentColor;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+}
+
+.icon-modern.icon-home::before {
+    width: 14px;
+    height: 12px;
+    border-bottom: none;
+    border-top: 2px solid transparent;
+    border-left: 8px solid currentColor;
+    border-right: 8px solid currentColor;
+}
+
+.icon-modern.icon-home::after {
+    content: "";
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 8px;
+    border: 2px solid currentColor;
+    border-top: none;
+}
+
+.icon-modern.icon-search::before {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.icon-modern.icon-search::after {
+    content: "";
+    position: absolute;
+    top: 65%;
+    left: 65%;
+    width: 6px;
+    height: 2px;
+    background: currentColor;
+    transform: rotate(45deg);
+}
+
+.icon-modern.icon-plus::before {
+    width: 12px;
+    height: 2px;
+    background: currentColor;
+    border: none;
+}
+
+.icon-modern.icon-plus::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+    width: 12px;
+    height: 2px;
+    background: currentColor;
+}
+
+.icon-modern.icon-times::before {
+    width: 12px;
+    height: 2px;
+    background: currentColor;
+    border: none;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.icon-modern.icon-times::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    width: 12px;
+    height: 2px;
+    background: currentColor;
+}
+
+/* Цветные варианты иконок */
+.icon-primary { color: var(--primary-color); }
+.icon-secondary { color: var(--secondary-color); }
+.icon-success { color: var(--success-color); }
+.icon-danger { color: var(--danger-color); }
+.icon-warning { color: var(--warning-color); }
+.icon-info { color: var(--info-color); }
+.icon-light { color: var(--light-color); }
+.icon-dark { color: var(--dark-color); }
+.icon-muted { color: var(--text-muted); }
+.icon-white { color: var(--text-white); }
+
+/* Размеры иконок */
+.icon-sm {
+    font-size: 0.875rem;
+    width: 0.875em;
+    height: 0.875em;
+}
+
+.icon-lg {
+    font-size: 1.25rem;
+    width: 1.25em;
+    height: 1.25em;
+}
+
+.icon-xl {
+    font-size: 1.5rem;
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.icon-2x {
+    font-size: 2rem;
+    width: 2em;
+    height: 2em;
+}
+
+.icon-3x {
+    font-size: 3rem;
+    width: 3em;
+    height: 3em;
+}
+
+/* Специальные эффекты */
+.icon-spin {
+    animation: icon-spin 2s infinite linear;
+}
+
+@keyframes icon-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.icon-pulse {
+    animation: icon-pulse 2s infinite;
+}
+
+@keyframes icon-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Иконки в кнопках */
+.btn .icon {
+    margin-right: 0.375rem;
+}
+
+.btn .icon:last-child {
+    margin-right: 0;
+    margin-left: 0.375rem;
+}
+
+/* Иконки в навигации */
+.nav-link .icon,
+.navbar-brand .icon {
+    margin-right: 0.5rem;
+}
+
+/* Иконки в алертах */
+.alert .icon {
+    margin-right: 0.5rem;
+    font-size: 1.1em;
+}
+
+/* Иконки в таблицах */
+.table .icon {
+    margin-right: 0.25rem;
+}
+
+/* Иконки в формах */
+.form-label .icon {
+    margin-right: 0.25rem;
+    color: var(--text-muted);
+}
+
+/* Иконки действий (action icons) */
+.action-icons {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.action-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    transition: all 0.15s ease-in-out;
+    color: var(--text-muted);
+}
+
+.action-icon:hover {
+    color: var(--primary-color);
+    background-color: var(--light-color);
+    text-decoration: none;
+}
+
+.action-icon.text-danger:hover {
+    color: var(--text-white);
+    background-color: var(--danger-color);
+}
+
+.action-icon.text-warning:hover {
+    color: var(--text-primary);
+    background-color: var(--warning-color);
+}
+
+.action-icon.text-success:hover {
+    color: var(--text-white);
+    background-color: var(--success-color);
+}
